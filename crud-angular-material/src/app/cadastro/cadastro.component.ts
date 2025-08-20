@@ -1,17 +1,20 @@
-import { Component } from '@angular/core'
-import { FlexLayoutModule } from '@angular/flex-layout'
-import { FormsModule } from '@angular/forms'
-import { MatButtonModule } from "@angular/material/button"
-import { MatCardModule } from '@angular/material/card'
-import { MatFormField, MatLabel } from '@angular/material/form-field'
-import { MatIcon } from "@angular/material/icon"
-import { MatInputModule } from '@angular/material/input'
-import { Cliente } from './cliente'
-import { ClienteService } from '../cliente.service'
+import {Component, OnInit} from '@angular/core'
+import {FlexLayoutModule} from '@angular/flex-layout'
+import {FormsModule} from '@angular/forms'
+import {MatButtonModule} from "@angular/material/button"
+import {MatCardModule} from '@angular/material/card'
+import {MatFormField, MatLabel} from '@angular/material/form-field'
+import {MatIcon} from "@angular/material/icon"
+import {MatInputModule} from '@angular/material/input'
+import {Cliente} from './cliente'
+import {ClienteService} from '../cliente.service'
+import {ActivatedRoute, Route, Router} from '@angular/router';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-cadastro',
   imports: [
+    CommonModule,
     FlexLayoutModule,
     FormsModule,
     MatCardModule,
@@ -24,14 +27,41 @@ import { ClienteService } from '../cliente.service'
   templateUrl: './cadastro.component.html',
   styleUrl: './cadastro.component.scss'
 })
-export class CadastroComponent {
+export class CadastroComponent implements OnInit {
 
   cliente: Cliente = Cliente.newCliente();
+  atualizando: boolean = false;
 
-  constructor(private service: ClienteService) { }
+  constructor(
+    private service: ClienteService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.route.queryParamMap.subscribe((query: any) => {
+      const params = query['params'];
+      const id = params['id'];
+      if (id) {
+        let clienteEncontrado = this.service.buscarClientePorId(id);
+
+        if (clienteEncontrado) {
+          this.atualizando = true;
+          this.cliente = clienteEncontrado;
+        }
+
+      }
+    })
+  }
 
   salvar() {
-    this.service.salvar(this.cliente);
-    this.cliente = {};
+    if (!this.atualizando) {
+      this.service.salvar(this.cliente);
+      this.cliente = Cliente.newCliente();
+    } else {
+      this.service.atualizar(this.cliente);
+      this.router.navigate(['/consulta']);
+    }
   }
 }

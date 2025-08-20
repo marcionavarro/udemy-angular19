@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Cliente } from './cadastro/cliente';
+import {Injectable} from '@angular/core';
+import {Cliente} from './cadastro/cliente';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,8 @@ export class ClienteService {
 
   static REPO_CLIENTES = "_CLIENTES";
 
-  constructor() { }
+  constructor() {
+  }
 
   salvar(cliente: Cliente) {
     const storage = this.obterStorage();
@@ -17,8 +18,29 @@ export class ClienteService {
     localStorage.setItem(ClienteService.REPO_CLIENTES, JSON.stringify(storage));
   }
 
-  pesquisarClientes(nome: string): Cliente[] {
-    return this.obterStorage();
+  atualizar(cliente: Cliente) {
+    const storage = this.obterStorage();
+    storage.forEach((c: Cliente) => {
+      if (c.id === cliente.id) {
+        Object.assign(c, cliente);
+      }
+    })
+    localStorage.setItem(ClienteService.REPO_CLIENTES, JSON.stringify(storage));
+  }
+
+  pesquisarClientes(nomeBusca: string): Cliente[] {
+    const clientes = this.obterStorage();
+
+    if (!nomeBusca) {
+      return clientes;
+    }
+
+    return clientes.filter(cliente => cliente.nome?.indexOf(nomeBusca) !== -1);
+  }
+
+  buscarClientePorId(id: string): Cliente | undefined {
+    const clientes = this.obterStorage();
+    return clientes.find(cliente => cliente.id === id);
   }
 
   private obterStorage(): Cliente[] {
