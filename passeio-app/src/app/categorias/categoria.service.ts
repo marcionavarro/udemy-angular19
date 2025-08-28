@@ -13,7 +13,7 @@ export class CategoriaService {
   }
 
   salvar(categoria: Categoria): Observable<Categoria> {
-    return this.http.post<Categoria>('http://localhost:3000/categorias', categoria);
+    return this.http.post<Categoria>(this.urlBase, categoria);
   }
 
   obterTodas(): Observable<Categoria[]> {

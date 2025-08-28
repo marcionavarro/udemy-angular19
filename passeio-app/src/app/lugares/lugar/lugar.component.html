@@ -16,6 +16,7 @@
       >
       <span
         class="text-red-500 text-sm"
+        *ngIf="isCampoInvalido('nome')"
       >
         Campo obrigatório
       </span>
@@ -34,21 +35,28 @@
           {{ cat.nome }}
         </option>
       </select>
+      <span
+        class="text-red-500 text-sm"
+        *ngIf="isCampoInvalido('categoria')"
+      >
+        Campo obrigatório
+      </span>
     </div>
 
     <div class="mb-4">
-      <label for="Localizacao" class="block text-gray-600 font-medium mb-2">Localização</label>
+      <label for="localizacao" class="block text-gray-600 font-medium mb-2">Localização</label>
       <input
         type="text"
-        id="Localizacao"
-        name="Localizacao"
-        formControlName="urlFoto"
+        id="localizacao"
+        name="localizacao"
+        formControlName="localizacao"
         placeholder="Ex: Rio de janeiro"
         class="w-full p-3 border border-gray-300 rounded shadow-sm focus:ring focus:ring-blue-400"
         required
       >
       <span
         class="text-red-500 text-sm"
+        *ngIf="isCampoInvalido('localizacao')"
       >
         Campo obrigatório
       </span>
@@ -67,6 +75,7 @@
       >
       <span
         class="text-red-500 text-sm"
+        *ngIf="isCampoInvalido('urlFoto')"
       >
         Campo obrigatório
       </span>

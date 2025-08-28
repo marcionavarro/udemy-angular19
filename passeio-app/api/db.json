@@ -1,24 +1,6 @@
 {
   "categorias": [
-    {
-      "id": "2",
-      "nome": "Shoppings",
-      "descricao": "Lugares para fazer compras e passear"
-    },
-    {
-      "nome": "Restaurantes Atualizado",
-      "descricao": "Lugares para alimentação",
-      "id": "1"
-    },
-    {
-      "id": "a431",
-      "nome": "Praias ",
-      "descricao": "Lugares para tomar banho com a familia"
-    },
-    {
-      "id": "57e2",
-      "nome": "Teste",
-      "descricao": "teste"
-    }
+  ],
+  "lugares": [
   ]
 }

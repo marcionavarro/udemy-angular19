@@ -24,10 +24,10 @@ export class CategoriaComponent {
       this.service.salvar(this.camposForm.value)
         .subscribe({
           next: categoria => {
+            console.log('Cadastrado com sucesso', categoria)
             this.camposForm.reset();
-            console.log('Salva com sucesso', categoria)
           },
-          error: erro => console.log('Erro ao salvar', erro)
+          error: erro => console.log('Erro ao Cadastrar', erro)
         })
     }
   }
