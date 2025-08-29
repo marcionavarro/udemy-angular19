@@ -1,6 +1,32 @@
 {
   "categorias": [
+    {
+      "id": "4298",
+      "nome": "Praias",
+      "descricao": " Melhores praias do Brasil!"
+    },
+    {
+      "id": "5a8a",
+      "nome": "Restaurantes",
+      "descricao": "Você pode reservar o espaço para eventos com ou sem buffet no período noturno e fins de semana"
+    }
   ],
   "lugares": [
+    {
+      "id": "5818",
+      "nome": "PRAIA DO SOL",
+      "categoria": "Praias",
+      "localizacao": "CACHOEIRA DOURADA DE GOIÁS⁩⁦ ",
+      "urlFoto": "https://www.melhoresdestinos.com.br/wp-content/uploads/2020/06/melhores-praias-do-brasil-capa2019.jpg",
+      "avaliacao": "5"
+    },
+    {
+      "id": "c6eb",
+      "nome": "Divina Grill Restaurante",
+      "categoria": "Restaurantes",
+      "localizacao": " Jardim Botânico, Uberlândia",
+      "urlFoto": "https://servircomrequinte.francobachot.com.br/wp-content/uploads/2020/08/post_thumbnail-5119340b39b314917440ed22562078eb.jpg",
+      "avaliacao": "4"
+    }
   ]
 }
