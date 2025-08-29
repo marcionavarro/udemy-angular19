@@ -30,14 +30,14 @@
         formControlName="categoria"
         class="w-full p-3 border-gray-300 rounded shadow-sm focus:outline-none focus:ring focus-ring-blue"
       >
-        <option [value]="" selected>Selecione uma categoria</option>
+        <option [value]="-1">Selecione uma categoria</option>
         <option *ngFor="let cat of categorias" [value]="cat.nome">
           {{ cat.nome }}
         </option>
       </select>
       <span
         class="text-red-500 text-sm"
-        *ngIf="isCampoInvalido('categoria')"
+        *ngIf="camposForm.controls['categoria'].errors?.['campoInvalido'] && camposForm.controls['categoria'].touched"
       >
         Campo obrigatório
       </span>
@@ -89,13 +89,19 @@
         formControlName="avaliacao"
         class="w-full p-3 border-gray-300 rounded shadow-sm focus:outline-none focus:ring focus-ring-blue"
       >
-        <option [value]="">Selecione uma avaliação</option>
+        <option [value]="-1">Selecione uma avaliação</option>
         <option [value]="1">1 - Ruim</option>
         <option [value]="2">2 - Regular</option>
         <option [value]="3">3 - Bom</option>
         <option [value]="4">4 - Muito Bom</option>
         <option [value]="5">5 - Excelente</option>
       </select>
+      <span
+        class="text-red-500 text-sm"
+        *ngIf="camposForm.controls['avaliacao'].errors?.['campoInvalido'] && camposForm.controls['avaliacao'].touched"
+      >
+        Campo obrigatório
+      </span>
     </div>
 
     <button type="submit" class="w-full bg-blue-600 text-white font-semibold p-3 rounded shadow hover:bg-blue-700">

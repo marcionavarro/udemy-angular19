@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CategoriaService} from '../../categorias/categoria.service';
 import {LugarService} from '../lugar.service';
 import {Lugar} from '../lugar';
+import {campoValidator} from '../../util/campoValidator';
 
 @Component({
   selector: 'app-lugar',
@@ -22,10 +23,10 @@ export class LugarComponent implements OnInit {
   ) {
     this.camposForm = new FormGroup({
       nome: new FormControl('', Validators.required),
-      categoria: new FormControl('', Validators.required),
+      categoria: new FormControl('-1', [Validators.required, campoValidator]),
       localizacao: new FormControl('', Validators.required),
       urlFoto: new FormControl('', Validators.required),
-      avaliacao: new FormControl('', Validators.required)
+      avaliacao: new FormControl('-1', [Validators.required, campoValidator])
     })
   }
 
