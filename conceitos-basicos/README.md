@@ -35,6 +35,24 @@ A aplicação “**Lista de Compras**” implementa as principais funcionalidade
 
 ---
 
+## ⚙️ Como executar o projeto
+
+```bash
+# clonar projeto
+https://github.com/marcionavarro/udemy-angular19.git
+cd conceitos-basicos
+
+# Instalar as dependências
+npm install
+
+# Rodar o servidor de desenvolvimento
+ng serve
+
+# Acesse no navegador:
+http://localhost:4200
+
+```
+
 ## 🖼️ Interface da aplicação
 
 Abaixo, o resultado da primeira seção do curso:
