@@ -1,27 +1,32 @@
-import {Component} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {ItemLista} from './itemLista';
-import {CommonModule} from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ItemLista } from './itemLista';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-lista-compras',
   imports: [FormsModule, CommonModule],
   templateUrl: './lista-compras.component.html',
-  styleUrl: './lista-compras.component.scss'
+  styleUrl: './lista-compras.component.scss',
 })
 export class ListaComprasComponent {
-
   item: string = '';
   lista: ItemLista[] = [];
+  msgError: string = '';
 
-  adicionarItem() {
+  adicionarItem(): string | void {
     let itemLista = new ItemLista();
     itemLista.id = this.lista.length + 1;
     itemLista.nome = this.item;
 
+    if (itemLista.nome == '') {
+      this.msgError = ' Campo obrigatório';
+      return;
+    }
     this.lista.push(itemLista);
 
     this.item = '';
+    this.msgError = '';
     console.table(this.lista);
   }
 

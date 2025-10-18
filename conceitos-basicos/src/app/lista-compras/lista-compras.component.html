@@ -1,6 +1,7 @@
 <div class="container">
   <h1>Lista de Compras</h1>
 
+   <p style="display: block; width: 100%; text-align: left; color: red; transition: 0.5ms ease-in-out;" *ngIf="!item">{{ msgError }}</p>
   <form #frm="ngForm" class="add-item-form" (ngSubmit)="adicionarItem()">
     <input type="text" name="item" id="item" placeholder="Digite o nome do item" [(ngModel)]="item"/>
     <button type="submit">Adicionar</button>

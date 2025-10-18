@@ -1,59 +1,42 @@
-# ConceitosBasicos
+# 🅰️ Conceitos Básicos
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
+Este projeto faz parte da primeira seção do curso, onde são abordados os **conceitos fundamentais do Angular**, criando uma aplicação prática: uma **Lista de Compras** interativa.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🧠 Conceitos aprendidos nesta seção
 
-```bash
-ng serve
-```
+- Introdução ao **Angular 19** e sua estrutura de projeto
+- Conceito de **componentes**, **módulos** e **templates**
+- Utilização de **property binding** e **event binding**
+- Manipulação de **diretivas estruturais** (`*ngFor`, `*ngIf`)
+- Criação e uso de **formularios reativos (Reactive Forms)**
+- Interação entre **componentes e template**
+- Aplicação de **estilos dinâmicos** com **Bootstrap** e classes condicionais
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🖥️ Funcionalidades da aplicação
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+A aplicação “**Lista de Compras**” implementa as principais funcionalidades aprendidas até esta etapa do curso:
 
-```bash
-ng generate component component-name
-```
+- ➕ **Adicionar itens à lista**  
+  O usuário digita o nome do item e clica em **Adicionar** para incluir na lista.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- 🗑️ **Limpar lista completa**  
+  Ao clicar em **Limpar Lista**, todos os itens são removidos do armazenamento local e da tela.
 
-```bash
-ng generate --help
-```
+- ✅ **Marcar itens concluídos**  
+  Cada item possui uma checkbox para marcar como comprado.
 
-## Building
+- ⚠️ **Validação de campo obrigatório**  
+  Caso o usuário tente adicionar um item vazio, uma mensagem de erro é exibida em vermelho:  
+  **“Campo obrigatório”**.
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+## 🖼️ Interface da aplicação
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Abaixo, o resultado da primeira seção do curso:
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## ![Lista de Compras - Angular 19](image.png)
