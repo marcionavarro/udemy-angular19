@@ -1,59 +1,100 @@
-# CrudAngularMaterial
+# 🅰️ CRUD com Angular Material
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
+**Objetivo:** Construir uma aplicação completa de **cadastro de clientes** com **Angular 19** e **Angular Material**, aplicando boas práticas de desenvolvimento, organização de componentes e manipulação de dados locais.
 
-## Development server
+---
 
-To start a local development server, run:
+## ⚙️ Funcionalidades Principais
+
+✅ **Cadastro de Clientes**
+
+- Formulário reativo com validação visual e mensagens de erro personalizadas.
+- Campos obrigatórios com feedback visual utilizando `MatFormField` e `FormControl`.
+- Máscaras de CPF e data de nascimento.
+
+✅ **Listagem e Consulta de Clientes**
+
+- Exibição dos registros em uma **tabela responsiva** (`MatTable`).
+- **Ordenação e Paginação** integradas com `MatSort` e `MatPaginator`.
+- Campo de pesquisa por nome com filtro dinâmico.
+
+✅ **Edição e Exclusão**
+
+- Ações de **Editar** e **Deletar** com ícones do Angular Material.
+- Atualização instantânea da lista após edição ou remoção.
+
+✅ **Feedback ao Usuário**
+
+- Exibição de mensagens via `MatSnackBar` para ações como salvar, limpar e validar campos.
+- Cores e layout inspirados no **Material Design**.
+
+✅ **Armazenamento Local**
+
+- Utilização de `localStorage` para salvar os dados do cliente.
+- Serviço dedicado para abstrair as operações de persistência e busca (`ClienteService`).
+
+---
+
+## 🧠 Conceitos Aplicados
+
+- **Componentização:** Separação de componentes de formulário, listagem e layout.
+- **Data Binding:** Uso de `[(ngModel)]` e `FormControl` para sincronização de dados.
+- **Angular Material:** Integração completa de tabelas, inputs, botões, diálogos e feedback visual.
+- **Reactive Forms:** Controle e validação de formulários dinâmicos.
+- **Lifecycle Hooks:** Uso de `ngOnInit`, `ngAfterViewInit` e `ngDoCheck`.
+- **Boas práticas:** Reutilização de componentes e injeção de dependências com `@Injectable`.
+
+---
+
+## 📚 Tecnologias Utilizadas
+
+- **Angular 19**
+- **Angular Material 19**
+- **brasilapi**
+- **TypeScript**
+- **RxJS**
+- **HTML / SCSS**
+- **LocalStorage API**
+
+---
+
+## 🧪 Como Executar o Projeto
 
 ```bash
+# 1️⃣ Clonar o repositório
+git clone https://github.com/seu-usuario/angular19-crud-material.git
+
+# 2️⃣ Acessar a pasta do projeto
+cd angular19-crud-material
+
+# 3️⃣ Instalar as dependências
+npm install
+
+# 4️⃣ Executar o servidor de desenvolvimento
 ng serve
+
+# 5️⃣ Acessar no navegador
+http://localhost:4200
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🖼️ Interface do Projeto
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+![Tela do Projeto](image.png)
 
-```bash
-ng generate component component-name
-```
+## 🖼️ Interface do Cadastro
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+![Tela do Cadastro](image-1.png)
 
-```bash
-ng generate --help
-```
+## 🖼️ Interface da Validação do Cadastro
 
-## Building
+![Tela da validação do Cadastro](image-2.png)
 
-To build the project run:
+## 🖼️ Interface da Edição do Cadastro
 
-```bash
-ng build
-```
+![Tela da edição do Cadastro](image-3.png)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 🖼️ Interface da Busca de Clientes
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+![Tela da busca de clientes](image-4.png)

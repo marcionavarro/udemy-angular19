@@ -1,3 +1,16 @@
 .spacer {
     flex: 1 1 auto;
 }
+
+.toolbar a{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 20px;
+    color: #FFF;
+    text-decoration: none;
+}
+
+.toolbar a:hover {
+    text-decoration: underline;
+}

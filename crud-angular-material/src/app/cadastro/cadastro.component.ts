@@ -1,20 +1,32 @@
-import {Component, inject, OnInit} from '@angular/core'
-import {FlexLayoutModule} from '@angular/flex-layout'
-import {FormsModule} from '@angular/forms'
-import {MatButtonModule} from "@angular/material/button"
-import {MatCardModule} from '@angular/material/card'
-import {MatFormField, MatLabel} from '@angular/material/form-field'
-import {MatIcon} from "@angular/material/icon"
-import {MatInputModule} from '@angular/material/input'
-import {MatSnackBar} from '@angular/material/snack-bar'
-import {Cliente} from './cliente'
-import {ClienteService} from '../cliente.service'
-import {ActivatedRoute, Router} from '@angular/router';
-import {CommonModule} from '@angular/common';
-import {NgxMaskDirective, provideNgxMask} from 'ngx-mask';
-import {BrasilapiService} from '../brasilapi.service';
-import {Estado, Municipio} from '../brasilapi.model';
-import {MatSelectChange, MatSelectModule} from '@angular/material/select';
+import { CommonModule } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, NgForm } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import {
+  MAT_DATE_LOCALE,
+  provideNativeDateAdapter,
+} from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { Estado, Municipio } from '../brasilapi.model';
+import { BrasilapiService } from '../brasilapi.service';
+import { ClienteService } from '../cliente.service';
+import { Cliente } from './cliente';
 
 @Component({
   selector: 'app-cadastro',
@@ -29,79 +41,101 @@ import {MatSelectChange, MatSelectModule} from '@angular/material/select';
     MatIcon,
     MatButtonModule,
     MatSelectModule,
-    NgxMaskDirective
+    NgxMaskDirective,
+    MatDatepickerModule,
   ],
-  providers: [provideNgxMask()],
+  providers: [
+    provideNgxMask(),
+    provideNativeDateAdapter(),
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+  ],
   templateUrl: './cadastro.component.html',
-  styleUrl: './cadastro.component.scss'
+  styleUrl: './cadastro.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CadastroComponent implements OnInit {
-
   cliente: Cliente = Cliente.newCliente();
   atualizando: boolean = false;
   snack: MatSnackBar = inject(MatSnackBar);
   estados: Estado[] = [];
   municipios: Municipio[] = [];
+  @ViewChild('clientesFrm') clientesFrm!: NgForm;
 
   constructor(
     private service: ClienteService,
     private brasilApiService: BrasilapiService,
     private route: ActivatedRoute,
-    private router: Router
-  ) {
-  }
+    private router: Router,
+    private cdRef: ChangeDetectorRef
+  ) {}
 
-  ngOnInit(): void {
-    this.route.queryParamMap.subscribe((query: any) => {
-      const params = query['params'];
-      const id = params['id'];
-      if (id) {
-        let clienteEncontrado = this.service.buscarClientePorId(id);
+  async ngOnInit(): Promise<void> {
+    const query = this.route.snapshot.queryParamMap;
+    const id = query.get('id');
 
-        if (clienteEncontrado) {
-          this.atualizando = true;
-          this.cliente = clienteEncontrado;
+    await this.carregarUfs(); // aguarda estados
 
-          if (this.cliente.uf) {
-            const event = {value: this.cliente.uf}
-            this.carregarMunicipios(event as MatSelectChange);
-          }
-          
+    if (id) {
+      const clienteEncontrado = this.service.buscarClientePorId(id);
+
+      if (clienteEncontrado) {
+        this.atualizando = true;
+        this.cliente = clienteEncontrado;
+
+        if (this.cliente.uf) {
+          await this.carregarMunicipios({ value: this.cliente.uf }); // aguarda municípios
+          // município será vinculado automaticamente porque ngModel já está com o valor
+          this.cdRef.detectChanges();
         }
       }
-    })
-
-    this.carregarUfs();
+    }
   }
 
-  carregarUfs() {
-    this.brasilApiService.listarUfs().subscribe({
-      next: listaEstados => this.estados = listaEstados,
-      error: erro => console.log("Ocorreu um erro: ", erro),
+  carregarUfs(): Promise<void> {
+    return new Promise((resolve) => {
+      this.brasilApiService.listarUfs().subscribe((ufs) => {
+        this.estados = ufs;
+        resolve();
+      });
     });
   }
 
-  carregarMunicipios(event: MatSelectChange) {
-    const ufSelecionada = event.value;
-    this.brasilApiService.listarMunicipios(ufSelecionada).subscribe({
-      next: listMunicipios => this.municipios = listMunicipios,
-      error: erro => console.log("Ocorreu um erro: ", erro)
-    })
+  carregarMunicipios(event: { value: string }): Promise<void> {
+    return new Promise((resolve) => {
+      const ufSelecionada = event.value;
+      this.brasilApiService
+        .listarMunicipios(ufSelecionada)
+        .subscribe((municipios) => {
+          this.municipios = municipios;
+          resolve();
+        });
+    });
   }
 
   salvar() {
+    if (this.clientesFrm.invalid) {
+      this.clientesFrm.control.markAllAsTouched();
+      this.mostrarMensagem('Por favor preencha todos os campos!');
+      return;
+    }
+
     if (!this.atualizando) {
       this.service.salvar(this.cliente);
       this.cliente = Cliente.newCliente();
+      this.limparForm();
       this.mostrarMensagem('Salvo com sucesso');
     } else {
       this.service.atualizar(this.cliente);
-      this.router.navigate(['/consulta']);
+      this.router.navigate(['']);
       this.mostrarMensagem('Atualizado com sucesso');
     }
   }
 
   mostrarMensagem(mensagem: string) {
-    this.snack.open(mensagem, "ok");
+    return this.snack.open(mensagem, 'OK');
+  }
+
+  limparForm() {
+    this.clientesFrm.resetForm();
   }
 }
