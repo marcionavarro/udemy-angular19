@@ -1,59 +1,83 @@
-# PasseioApp
+# 🧭 Passeio App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
+Uma aplicação Angular para listar e gerenciar passeios e lugares, com API simulada via `json-server`.
 
-## Development server
+**Status:** Em desenvolvimento
 
-To start a local development server, run:
+## 🛠️ Tecnologias
 
-```bash
-ng serve
-```
+- Angular 19
+- TailwindCSS
+- json-server (API fake / desenvolvimento)
+- TypeScript
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## ⚙️ Requisitos
 
-## Code scaffolding
+- Node.js: recomendado 18.x (LTS) ou 20.x (LTS)
+- npm (vem com Node.js)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+> Observação: o repositório não define o campo `engines` no `package.json`. Testado com Node.js LTS (18/20).
 
-```bash
-ng generate component component-name
-```
+## 🚀 Instalação
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+1. Clone o repositório
 
 ```bash
-ng build
+git clone https://github.com/marcionavarro/udemy-angular19
+cd passeio-app
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+2. Instale dependências
 
 ```bash
-ng test
+npm install
 ```
 
-## Running end-to-end tests
+## ▶️ Como rodar (desenvolvimento)
 
-For end-to-end (e2e) testing, run:
+- Rodar a aplicação Angular (frontend):
 
 ```bash
-ng e2e
+npm start
+# ou: npm run start
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- Rodar a API fake (json-server):
 
-## Additional Resources
+```bash
+npm run server
+# ou para dados de produção de exemplo:
+npm run server:production
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Abra o frontend em `http://localhost:4200` e a API em `http://localhost:3000` (porta padrão do json-server).
+
+Para rodar ambos simultaneamente, use dois terminais ou uma ferramenta de processos em paralelo.
+
+## 🧪 Build
+
+```bash
+npm run build
+```
+
+## 🖼️ Screenshots
+
+![Tela Login](docs/screenshots/login.png)
+![Tela inicial](docs/screenshots/inicial.png)
+![Tela inicial](docs/screenshots/galeria.png)
+![Tela inicial](docs/screenshots/cad_lugares.png)
+
+> Dica: coloque imagens com 1280×720 para visualização adequada no GitHub.
+
+## 🔧 Estrutura principal
+
+- `src/app` — código Angular (módulos: `categorias`, `lugares`, `galeria`, `template`, etc.)
+- `api/db.json` — dados fake para desenvolvimento
+- `public/` — arquivos públicos
+
+## ✅ Observações
+
+- Scripts úteis no `package.json`:
+  - `start` — inicia o frontend (`ng serve`)
+  - `server` — inicia o `json-server` com `api/db.json`
+  - `server:production` — inicia o `json-server` com `api/db.production.json` na porta `4000`
