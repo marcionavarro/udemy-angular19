@@ -1,1 +1,6 @@
 https://module-federation.io/
+
+
+npx ng add @angular-architects/native-federation@22.2.0 --project vendas --port 4200 --type host --skip-confirmation
+npx ng add @angular-architects/native-federation@22.2.0 --project produtos --port 4201 --type remote --skip-confirmation
+npx ng add @angular-architects/native-federation@22.2.0 --project grafico --port 4202 --type remote --skip-confirmation
