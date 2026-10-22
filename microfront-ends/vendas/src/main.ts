@@ -1,7 +1,7 @@
 import { initFederation } from '@angular-architects/native-federation';
 
 initFederation(
-  {},
+  'assets/federation.manifest.json',
   {
     hostRemoteEntry: { url: './remoteEntry.json' },
   },
