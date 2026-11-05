@@ -1,59 +1,77 @@
-# Produtos
+# 📦 Produtos — Remote
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.3.
+Microfrontend responsável pelo catálogo de produtos da loja e pelo componente de carrinho. A aplicação pode ser executada sozinha, mas foi projetada para ser carregada pelo host `vendas`.
 
-## Development server
+## 🎯 Responsabilidade
 
-To start a local development server, run:
+- 🛍️ Exibir a lista de produtos.
+- 💰 Formatá-los em reais usando `CurrencyPipe`.
+- 🛒 Disponibilizar o componente de carrinho.
+- 🔌 Expor componentes para consumo via Native Federation.
 
-```bash
-ng serve
-```
+## 🔌 Componentes expostos
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Configurados em `federation.config.mjs`:
 
-## Code scaffolding
+| Expose | Arquivo | Uso no host |
+| --- | --- | --- |
+| `./Component` | `src/app/app.ts` | Catálogo em `/produtos` |
+| `./Carrinho` | `src/app/carrinho/carrinho.ts` | Carrinho em `/carrinho` |
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+O catálogo usa dados locais de demonstração e imagens remotas do serviço Picsum.
 
-```bash
-ng generate component component-name
-```
+## 🛠️ Tecnologias
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+| Tecnologia | Finalidade |
+| --- | --- |
+| Angular 22 | Interface do catálogo |
+| Native Federation | Exposição dos componentes |
+| TypeScript 6 | Modelagem e lógica |
+| Angular CurrencyPipe | Formatação de preços |
+| SCSS | Estilos |
+| Vitest | Testes unitários |
 
-```bash
-ng generate --help
-```
+## 📋 Pré-requisitos
 
-## Building
+- Node.js compatível com Angular 22.
+- npm 11.17.0 ou compatível.
+- Dependências instaladas nesta pasta.
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+## 🚀 Executar
 
 ```bash
-ng e2e
+cd produtos
+npm install
+npm start
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Acesse [http://localhost:4201](http://localhost:4201). Para visualizar o catálogo dentro da experiência integrada, mantenha também o host `vendas` em execução.
 
-## Additional Resources
+## 🧪 Build e testes
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm run build
+npm test
+npm run watch
+```
+
+## 📸 Screenshot
+
+![Arquitetura dos microfrontends](../docs/MicrofrontEnds.png)
+
+## 📁 Estrutura
+
+```text
+produtos/
+├── src/app/app.ts          # Catálogo exposto como ./Component
+├── src/app/app.html        # Cards de produtos
+├── src/app/carrinho/       # Componente exposto como ./Carrinho
+├── federation.config.mjs   # Exposes e dependências compartilhadas
+└── package.json            # Scripts e dependências
+```
+
+## 📚 Recursos
+
+- 📘 [Angular](https://angular.dev/)
+- 🔗 [Native Federation](https://www.npmjs.com/package/@angular-architects/native-federation)
+- 💱 [Angular CurrencyPipe](https://angular.dev/api/common/CurrencyPipe)

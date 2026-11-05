@@ -1,59 +1,85 @@
-# Vendas
+# 🛒 Vendas — Host
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.3.
+Aplicação host do projeto de microfrontends. Ela fornece a navegação principal, a tela inicial e integra os componentes remotos de produtos e gráfico usando Native Federation.
 
-## Development server
+## 🎯 Responsabilidade
 
-To start a local development server, run:
+- 🏠 Exibir a página inicial da loja.
+- 🧭 Fornecer a barra de navegação.
+- 🔌 Carregar os remotes `produtos` e `grafico` sob demanda.
+- 🛣️ Disponibilizar as rotas `/produtos`, `/carrinho` e `/grafico`.
 
-```bash
-ng serve
-```
+## 🧩 Integração com remotes
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+As rotas em `src/app/app.routes.ts` usam `loadRemoteModule`:
 
-## Code scaffolding
+| Rota | Remote | Expose |
+| --- | --- | --- |
+| `/produtos` | `produtos` | `./Component` |
+| `/carrinho` | `produtos` | `./Carrinho` |
+| `/grafico` | `grafico` | `./Component` |
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Os remotes precisam estar disponíveis nas portas 4201 e 4202 para que essas rotas sejam carregadas.
 
-```bash
-ng generate component component-name
-```
+## 🛠️ Tecnologias
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+| Tecnologia | Finalidade |
+| --- | --- |
+| Angular 22 | Aplicação host |
+| TypeScript 6 | Código da aplicação |
+| Native Federation | Carregamento de componentes remotos |
+| SCSS | Estilos |
+| Vitest | Testes unitários |
 
-```bash
-ng generate --help
-```
+## 📋 Pré-requisitos
 
-## Building
+- Node.js compatível com Angular 22.
+- npm 11.17.0 ou compatível.
+- Dependências dos três projetos instaladas.
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+## 🚀 Executar
 
 ```bash
-ng e2e
+cd vendas
+npm install
+npm start
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Acesse [http://localhost:4200](http://localhost:4200). Para a integração completa, execute também:
 
-## Additional Resources
+```bash
+cd ../produtos && npm start
+cd ../grafico && npm start
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+> 💡 Em terminais separados, os comandos dos remotes devem permanecer ativos.
+
+## 🧪 Build e testes
+
+```bash
+npm run build
+npm test
+npm run watch
+```
+
+## 📸 Screenshot
+
+![Arquitetura dos microfrontends](../docs/MicrofrontEnds.png)
+
+## 📁 Estrutura
+
+```text
+vendas/
+├── src/app/home/            # Tela inicial
+├── src/app/navbar/          # Barra de navegação
+├── src/app/app.routes.ts    # Rotas locais e remotas
+├── src/app/app.config.ts    # Configuração do Angular
+├── federation.config.mjs    # Configuração do host
+└── package.json             # Scripts e dependências
+```
+
+## 📚 Recursos
+
+- 📘 [Angular](https://angular.dev/)
+- 🔗 [Native Federation](https://www.npmjs.com/package/@angular-architects/native-federation)
+- 🧩 [Module Federation](https://module-federation.io/)

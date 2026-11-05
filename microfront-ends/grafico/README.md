@@ -1,59 +1,74 @@
-# Grafico
+# 📊 Gráfico — Remote
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.3.
+Microfrontend responsável por apresentar um dashboard de vendas. Ele cria um gráfico de barras com dados demonstrativos e expõe o componente para ser carregado pelo host `vendas`.
 
-## Development server
+## 🎯 Responsabilidade
 
-To start a local development server, run:
+- 📈 Renderizar vendas agrupadas por categoria.
+- 🧮 Transformar categorias e valores em datasets do gráfico.
+- 🔌 Expor o dashboard como componente remoto.
+- 📱 Usar o modo responsivo do Chart.js.
 
-```bash
-ng serve
-```
+## 🔌 Componente exposto
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+| Expose | Arquivo | Uso no host |
+| --- | --- | --- |
+| `./Component` | `src/app/app.ts` | Dashboard em `/grafico` |
 
-## Code scaffolding
+O gráfico utiliza as categorias Eletrônicos, Roupas, Decoração, Ferramentas e Acessórios com dados locais de demonstração.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🛠️ Tecnologias
 
-```bash
-ng generate component component-name
-```
+| Tecnologia | Finalidade |
+| --- | --- |
+| Angular 22 | Componente do dashboard |
+| Native Federation | Exposição do remote |
+| Chart.js 4 | Gráfico de barras |
+| TypeScript 6 | Lógica e tipagem |
+| SCSS | Estilos responsivos |
+| Vitest | Testes unitários |
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 📋 Pré-requisitos
 
-```bash
-ng generate --help
-```
+- Node.js compatível com Angular 22.
+- npm 11.17.0 ou compatível.
+- Dependências instaladas nesta pasta.
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## 🚀 Executar
 
 ```bash
-ng test
+cd grafico
+npm install
+npm start
 ```
 
-## Running end-to-end tests
+Acesse [http://localhost:4202](http://localhost:4202). Para navegar pelo dashboard a partir da aplicação integrada, execute também o host `vendas`.
 
-For end-to-end (e2e) testing, run:
+## 🧪 Build e testes
 
 ```bash
-ng e2e
+npm run build
+npm test
+npm run watch
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 📸 Screenshot
 
-## Additional Resources
+![Arquitetura dos microfrontends](../docs/MicrofrontEnds.png)
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📁 Estrutura
+
+```text
+grafico/
+├── src/app/app.ts          # Configuração e criação do Chart.js
+├── src/app/app.html        # Canvas do gráfico
+├── src/app/app.scss        # Layout do dashboard
+├── federation.config.mjs   # Expose do componente
+└── package.json            # Scripts e dependências
+```
+
+## 📚 Recursos
+
+- 📘 [Angular](https://angular.dev/)
+- 📊 [Chart.js](https://www.chartjs.org/docs/latest/)
+- 🔗 [Native Federation](https://www.npmjs.com/package/@angular-architects/native-federation)
