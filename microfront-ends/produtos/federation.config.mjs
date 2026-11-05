@@ -8,6 +8,7 @@ export default withNativeFederation({
 
   exposes: {
     './Component': './src/app/app.ts',
+    './Carrinho': './src/app/carrinho/carrinho.ts',
   },
 
   shared: fromPackageJson({
